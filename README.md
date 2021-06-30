@@ -1,6 +1,6 @@
 <img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/docs/gen_dbus_logo.png" width="25%">
 
-# Generate Unnamed Pipe
+# Generate DBus
 
 **gen_dbus** is tool for generation of dbus modules.
 
