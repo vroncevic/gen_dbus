@@ -2,7 +2,7 @@
 
 # Generate DBus
 
-**gen_dbus** is tool for generation of dbus modules.
+**gen_dbus** is tool for generation of [dbus](overview.md) modules.
 
 Developed in **[python](https://www.python.org/)** code: **100%**.
 
