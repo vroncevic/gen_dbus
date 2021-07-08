@@ -75,3 +75,5 @@ nowadays it can also be provided by systemd's service activation framework.
 Service activation is an important feature that facilitates the management of
 the process lifecycle of services (for example when a desktop component should
 start or stop).
+
+[back](bus_model.md)

@@ -22,10 +22,16 @@ instantiating multiple buses, notably:
 provides access to system services (i.e. services provided by the operating
 system and also by any system daemons)
 
+![daemon dbus](https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/docs/dbus_multiple_processes_and_daemon_process.png)
+
 * a session bus for each user login session, that provides desktop services to
 user applications in the same desktop session, and allows the integration of
-the desktop session as a whole
+the desktop session as a whole.
+
+![libdbus](https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/docs/dbus_multiple_processes.png)
 
 D-Bus provides additional or simplifies existing functionality to the
 applications, including information-sharing, modularity and privilege
 separation.
+
+[back](README.md)

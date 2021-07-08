@@ -169,7 +169,9 @@ format called the wire format which supports the serialization of various
 types, such as integers and floating-point numbers, strings, compound types,
 and so on, also referred to as marshaling.
 
-The D-Bus [specification](architecture.md) defines the wire protocol: how to build the D-Bus
-messages to be exchanged between processes within a D-Bus connection.
-However, it does not define the underlying transport method for delivering
-these messages.
+The D-Bus [specification](architecture.md) defines the wire protocol:
+how to build the D-Bus messages to be exchanged between processes within a
+D-Bus connection. However, it does not define the underlying transport method
+for delivering these messages.
+
+[back](overview.md)
