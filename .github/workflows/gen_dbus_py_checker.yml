@@ -2,8 +2,14 @@ name: gen_dbus py checker
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'gen_dbus/**'
+      - 'setup.py'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'gen_dbus/**'
+      - 'setup.py'
 jobs:
   build:
     runs-on: ubuntu-latest
