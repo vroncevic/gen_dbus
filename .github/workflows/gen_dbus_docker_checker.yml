@@ -2,11 +2,11 @@ name: gen_dbus docker checker
 on:
   push:
     branches: [ main ]
-    aths:
+    paths:
       - 'Dockerfile'
   pull_request:
     branches: [ main ]
-    aths:
+    paths:
       - 'Dockerfile'
 jobs:
   build:
