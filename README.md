@@ -10,7 +10,7 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-![Python package](https://github.com/vroncevic/gen_dbus/workflows/Python%20package%20gen_dbus/badge.svg?branch=master) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/graphs/contributors)
+[![Python package gen_dbus](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -30,7 +30,7 @@ other information that should be provided before the modules are installed.
 
 ### Installation
 
-![Install Python2 Package](https://github.com/vroncevic/gen_dbus/workflows/Install%20Python2%20Package%20gen_dbus/badge.svg?branch=master) ![Install Python3 Package](https://github.com/vroncevic/gen_dbus/workflows/Install%20Python3%20Package%20gen_dbus/badge.svg?branch=master)
+[![Install Python2 Package gen_dbus](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python2_publish.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python2_publish.yml) [![Install Python3 Package gen_dbus](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python3_publish.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python3_publish.yml)
 
 Currently there are three ways to install tool:
 * Install process based on pip
@@ -73,7 +73,7 @@ python3 setup.py install_egg_info
 
 You can use docker to create image/container.
 
-[![gen_dbus docker checker](https://github.com/vroncevic/gen_dbus/workflows/gen_dbus%20docker%20checker/badge.svg)](https://github.com/vroncevic/gen_dbus/actions?query=workflow%3A%22gen_dbus+docker+checker%22)
+[![gen_dbus docker checker](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_docker_checker.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_docker_checker.yml)
 
 ### Dependencies
 
