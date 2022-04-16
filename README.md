@@ -96,7 +96,7 @@ ln -s /usr/local/lib/python3.9/dist-packages/usr/local/bin/gen_dbus_run.py /usr/
 
 Navigate to release **[page](https://github.com/vroncevic/gen_dbus/releases/)** download and extract release archive 📦.
 
-To install modules, locate and run setup.py with arguments
+To install **gen_dbus** locate and run setup.py with arguments
 
 ```bash
 tar xvzf gen_dbus-x.y.z.tar.gz
