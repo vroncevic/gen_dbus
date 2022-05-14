@@ -45,7 +45,7 @@ Navigate to release `page`_ download and extract release archive.
 
 .. _page: https://github.com/vroncevic/gen_dbus/releases
 
-To install this set of modules type the following
+To install **gen_dbus** type the following
 
 .. code-block:: bash
 
