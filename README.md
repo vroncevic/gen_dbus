@@ -10,7 +10,7 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-[![gen_dbus py code checker](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_py_checker.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_py_checker.yml) [![gen_dbus python package checker](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/graphs/contributors)
+[![gen_dbus python checker](https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python_checker?style=flat&label=gen_dbus%20python%20checker)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python_checker.yml) [![gen_dbus package checker](https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_package_checker?style=flat&label=gen_dbus%20package%20checker)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package_checker.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_dbus.svg)](https://github.com/vroncevic/gen_dbus/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -36,7 +36,7 @@ Used next development environment
 
 ![Development environment](https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/docs/ubuntuxis.png)
 
-[![gen_dbus build python2 package](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python2_publish.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python2_publish.yml) [![gen_dbus build python3 package](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python3_publish.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python3_publish.yml)
+[![gen_dbus python2 build](https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python2_build?style=flat&label=gen_dbus%20python2%20build)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python2_build.yml) [![gen_dbus python3 build](https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python3_build?style=flat&label=gen_dbus%20python3%20build)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python3_build.yml)
 
 Currently there are three ways to install package
 * Install process based on using pip mechanism
@@ -61,7 +61,7 @@ pip3 install gen-dbus
 
 Navigate to release **[page](https://github.com/vroncevic/gen_dbus/releases/)** download and extract release archive 📦.
 
-To install **gen_dbus** type the following
+To install **gen_dbus** 📦 type the following
 
 ```bash
 tar xvzf gen_dbus-x.y.z.tar.gz
@@ -96,7 +96,7 @@ ln -s /usr/local/lib/python3.9/dist-packages/usr/local/bin/gen_dbus_run.py /usr/
 
 Navigate to release **[page](https://github.com/vroncevic/gen_dbus/releases/)** download and extract release archive 📦.
 
-To install **gen_dbus** locate and run setup.py with arguments
+To install **gen_dbus** 📦 locate and run setup.py with arguments
 
 ```bash
 tar xvzf gen_dbus-x.y.z.tar.gz
@@ -117,13 +117,13 @@ python3 setup.py install_egg_info
 
 You can use Dockerfile to create image/container 🚢.
 
-[![gen_dbus docker checker](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_docker_checker.yml/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_docker_checker.yml)
+[![gen_dbus docker checker](https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_docker_checker?style=flat&label=gen_dbus%20docker%20checker)](https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_docker_checker.yml)
 
 ### Dependencies
 
 **gen_dbus** requires next modules and libraries
 
-* [ats-utilities - Python App/Tool/Script Utilities](https://vroncevic.github.io/ats_utilities)
+* [ats-utilities - Python App/Tool/Script Utilities](https://vroncevic.github.io/gen_dbus)
 
 ### Generation flow of py module
 
@@ -135,7 +135,7 @@ Base flow of generation process
 
 **gen_dbus** is based on OOP
 
-Generator structure
+🧰 Generator structure
 
 ```bash
 gen_dbus/
@@ -145,9 +145,89 @@ gen_dbus/
 │   ├── gen_dbus_util.cfg
 │   ├── project.yaml
 │   └── template/
-│       ├── posix_c
-│       ├── posix_cxx
-│       └── py
+│       ├── posix_c/
+│       │   ├── dbus_client/
+│       │   │   ├── AUTHORS.template
+│       │   │   ├── autogen.template
+│       │   │   ├── ChangeLog.template
+│       │   │   ├── configure.template
+│       │   │   ├── COPYING.template
+│       │   │   ├── Makefile.template
+│       │   │   ├── NEWS.template
+│       │   │   ├── README.template
+│       │   │   └── src/
+│       │   │       ├── main.template
+│       │   │       └── Makefile.template
+│       │   └── dbus_server/
+│       │       ├── AUTHORS.template
+│       │       ├── autogen.template
+│       │       ├── ChangeLog.template
+│       │       ├── configure.template
+│       │       ├── COPYING.template
+│       │       ├── Makefile.template
+│       │       ├── NEWS.template
+│       │       ├── README.template
+│       │       └── src/
+│       │           ├── main.template
+│       │           └── Makefile.template
+│       ├── posix_cxx/
+│       │   ├── dbus_client/
+│       │   │   ├── AUTHORS.template
+│       │   │   ├── autogen.template
+│       │   │   ├── ChangeLog.template
+│       │   │   ├── configure.template
+│       │   │   ├── COPYING.template
+│       │   │   ├── Makefile.template
+│       │   │   ├── NEWS.template
+│       │   │   ├── po/
+│       │   │   │   ├── ChangeLog.template
+│       │   │   │   ├── LINGUAS.template
+│       │   │   │   └── POTFILES.template
+│       │   │   ├── README.template
+│       │   │   └── src/
+│       │   │       ├── main.template
+│       │   │       └── Makefile.template
+│       │   └── dbus_server/
+│       │       ├── AUTHORS.template
+│       │       ├── autogen.template
+│       │       ├── ChangeLog.template
+│       │       ├── configure.template
+│       │       ├── COPYING.template
+│       │       ├── Makefile.template
+│       │       ├── NEWS.template
+│       │       ├── po/
+│       │       │   ├── ChangeLog.template
+│       │       │   ├── LINGUAS.template
+│       │       │   └── POTFILES.template
+│       │       ├── README.template
+│       │       └── src/
+│       │           ├── main.template
+│       │           └── Makefile.template
+│       └── posix_py/
+│           ├── dbus_client/
+│           │   ├── AUTHORS.template
+│           │   ├── autogen.template
+│           │   ├── ChangeLog.template
+│           │   ├── configure.template
+│           │   ├── COPYING.template
+│           │   ├── Makefile.template
+│           │   ├── NEWS.template
+│           │   ├── README.template
+│           │   └── src/
+│           │       ├── dbus_client.template
+│           │       └── Makefile.template
+│           └── dbus_server/
+│               ├── AUTHORS.template
+│               ├── autogen.template
+│               ├── ChangeLog.template
+│               ├── configure.template
+│               ├── COPYING.template
+│               ├── Makefile.template
+│               ├── NEWS.template
+│               ├── README.template
+│               └── src/
+│                   ├── dbus_server.template
+│                   └── Makefile.template
 ├── __init__.py
 ├── log/
 │   └── gen_dbus.log
@@ -161,13 +241,12 @@ gen_dbus/
 └── run/
     └── gen_dbus_run.py
 
-9 directories, 12 files
+23 directories, 78 files
 ```
 
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/gen_dbus/badge/?version=latest)](https://gen_dbus.readthedocs.io/en/latest/?badge=latest)
- [![pages-build-deployment](https://github.com/vroncevic/gen_dbus/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/vroncevic/gen_dbus/actions/workflows/pages/pages-build-deployment)
 
 📗 More documentation and info at
 

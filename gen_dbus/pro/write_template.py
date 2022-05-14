@@ -21,7 +21,9 @@
 '''
 
 import sys
-from os import getcwd, chmod
+from os import getcwd, chmod, mkdir
+from os.path import exists, isdir
+from datetime import date
 from string import Template
 
 try:
@@ -83,16 +85,14 @@ class WriteTemplate(FileChecking):
         '''
         return self.__setup
 
-    def write(self, setup_content, pro_name, module, verbose=False):
+    def write(self, setup_content, pro_name, verbose=False):
         '''
             Write setup content to file generator_test.py.
 
             :param setup_content: template content.
-            :type setup_content: <str>
+            :type setup_content: <dict>
             :param pro_name: parameter package name.
             :type pro_name: <str>
-            :param module: module name.
-            :type module: <str>
             :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :return: boolean status, True (success) | False.
@@ -101,29 +101,39 @@ class WriteTemplate(FileChecking):
         '''
         checker, error, status = ATSChecker(), None, False
         error, status = checker.check_params([
-            ('str:setup_content', setup_content),
-            ('str:pro_name', pro_name),
-            ('str:module', module)
+            ('dict:setup_content', setup_content), ('str:pro_name', pro_name)
         ])
         if status == ATSChecker.TYPE_ERROR:
             raise ATSTypeError(error)
         if status == ATSChecker.VALUE_ERROR:
             raise ATSBadCallError(error)
-        status, template = False, None
-        self.__setup = '{0}/{1}'.format(getcwd(), module)
-        verbose_message(WriteTemplate.GEN_VERBOSE, verbose, 'write', module)
-        package = {'PRO': '{0}'.format(pro_name)}
-        template = Template(setup_content)
-        if template:
-            with open(self.__setup, 'w') as setup_file:
-                setup_file.write(template.substitute(package))
-                chmod(self.__setup, 0o666)
-                self.check_path(self.__setup, verbose=verbose)
-                self.check_mode('w', verbose=verbose)
-                self.check_format(self.__setup, 'py',verbose=verbose)
-                if self.is_file_ok():
-                    status = True
-        return status
+        template = None
+        self.__setup = '{0}/{1}'.format(getcwd(), pro_name)
+        verbose_message(WriteTemplate.GEN_VERBOSE, verbose, 'write', pro_name)
+        if not exists(self.__setup) or not isdir(self.__setup):
+            mkdir(self.__setup)
+            for entity_dir in list(setup_content.keys()):
+                mkdir('{0}/{1}'.format(self.__setup, entity_dir))
+                mkdir('{0}/{1}/src'.format(self.__setup, entity_dir))
+                mkdir('{0}/{1}/po'.format(self.__setup, entity_dir))
+        else:
+            return False
+        package, statuses = {
+            'PRO': '{0}'.format(pro_name),
+            'YEAR': '{0}'.format(date.today().year)
+        }, []
+        for entity in list(setup_content.keys()):
+            for module, content in setup_content[entity].items():
+                template = Template(content)
+                if template:
+                    template_file = '{0}/{1}/{2}'.format(
+                        self.__setup, entity, module
+                    )
+                    with open(template_file, 'w') as setup_file:
+                        setup_file.write(template.substitute(package))
+                        chmod(template_file, 0o666)
+                        statuses.append(True)            
+        return all(statuses)
 
     def __str__(self):
         '''
