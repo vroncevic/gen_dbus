@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Welcome to gen_dbus’s documentation! &#8212; gen_dbus https://github.com/vroncevic/gen_dbus/releases documentation</title>
+    <title>Generate DBus &#8212; gen_dbus https://github.com/vroncevic/gen_dbus/releases documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -15,6 +15,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gen_dbus" href="modules.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -31,10 +32,186 @@
 
           <div class="body" role="main">
             
-  <section id="welcome-to-gen-dbus-s-documentation">
-<h1>Welcome to gen_dbus’s documentation!<a class="headerlink" href="#welcome-to-gen-dbus-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <section id="generate-dbus">
+<h1>Generate DBus<a class="headerlink" href="#generate-dbus" title="Permalink to this headline">¶</a></h1>
+<p>☯️ <strong>gen_dbus</strong> is tool for generation of dbus modules.</p>
+<p>Developed in 🐍 <a class="reference external" href="https://www.python.org/">python</a> code.</p>
+<p>The README is used to introduce the modules and provide instructions on
+how to install the modules, any machine dependencies it may have and any
+other information that should be provided before the modules are installed.</p>
+<p><a class="reference external" href="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python_checker"><img alt="python package" src="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python_checker?style=flat&amp;label=gen_dbus%20python%20checker" /></a> <a class="reference external" href="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_package_checker"><img alt="github issues" src="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_package_checker?style=flat&amp;label=gen_dbus%20package%20checker" /></a> <a class="reference external" href="https://readthedocs.org/projects/gen-autoconf/badge/?version=latest"><img alt="documentation status" src="https://readthedocs.org/projects/gen-autoconf/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/vroncevic/gen_dbus/graphs/contributors"><img alt="github contributors" src="https://img.shields.io/github/contributors/vroncevic/gen_dbus.svg" /></a></p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Generate DBus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">gen_dbus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gen_dbus.html">gen_dbus package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gen_dbus.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gen_dbus.pro.html">gen_dbus.pro package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gen_dbus.html#module-gen_dbus">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python2_build"><img alt="install python2 package" src="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python2_build?style=flat&amp;label=gen_dbus%20python2%20build" /></a> <a class="reference external" href="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python3_build"><img alt="install python3 package" src="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_python3_build?style=flat&amp;label=gen_dbus%20python3%20build" /></a></p>
+<p>Navigate to release <a class="reference external" href="https://github.com/vroncevic/gen_dbus/releases">page</a> download and extract release archive.</p>
+<p>To install this set of modules type the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar xvzf gen_dbus-x.y.z.tar.gz
+<span class="nb">cd</span> gen_dbus-x.y.z
+<span class="c1">#python2</span>
+pip install -r requirements.txt
+python setup.py install_lib
+python setup.py install_egg_info
+python setup.py install_data
+<span class="c1">#python3</span>
+pip3 install -r requirements.txt
+python3 setup.py install_lib
+python3 setup.py install_egg_info
+python3 setup.py install_data
+</pre></div>
+</div>
+<p>You can use Docker to create image/container, or You can use pip to install</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#python2</span>
+pip install gen_dbus
+<span class="c1">#python3</span>
+pip3 install gen_dbus
+</pre></div>
+</div>
+<p><a class="reference external" href="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_docker_checker"><img alt="github docker checker" src="https://img.shields.io/github/workflow/status/vroncevic/gen_dbus/gen_dbus_docker_checker?style=flat&amp;label=gen_dbus%20docker%20checker" /></a></p>
+</section>
+<section id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
+<p><strong>gen_dbus</strong> requires next modules and libraries</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/ats-utilities/">ats-utilities - Python App/Tool/Script Utilities</a></p></li>
+</ul>
+</section>
+<section id="tool-structure">
+<h1>Tool structure<a class="headerlink" href="#tool-structure" title="Permalink to this headline">¶</a></h1>
+<p><strong>gen_dbus</strong> is based on OOP</p>
+<p>🧰 Code structure</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gen_dbus/
+├── conf/
+│   ├── gen_dbus.cfg
+│   ├── gen_dbus.logo
+│   ├── gen_dbus_util.cfg
+│   ├── project.yaml
+│   └── template/
+│       ├── posix_c/
+│       │   ├── dbus_client/
+│       │   │   ├── AUTHORS.template
+│       │   │   ├── autogen.template
+│       │   │   ├── ChangeLog.template
+│       │   │   ├── configure.template
+│       │   │   ├── COPYING.template
+│       │   │   ├── Makefile.template
+│       │   │   ├── NEWS.template
+│       │   │   ├── README.template
+│       │   │   └── src/
+│       │   │       ├── main.template
+│       │   │       └── Makefile.template
+│       │   └── dbus_server/
+│       │       ├── AUTHORS.template
+│       │       ├── autogen.template
+│       │       ├── ChangeLog.template
+│       │       ├── configure.template
+│       │       ├── COPYING.template
+│       │       ├── Makefile.template
+│       │       ├── NEWS.template
+│       │       ├── README.template
+│       │       └── src/
+│       │           ├── main.template
+│       │           └── Makefile.template
+│       ├── posix_cxx/
+│       │   ├── dbus_client/
+│       │   │   ├── AUTHORS.template
+│       │   │   ├── autogen.template
+│       │   │   ├── ChangeLog.template
+│       │   │   ├── configure.template
+│       │   │   ├── COPYING.template
+│       │   │   ├── Makefile.template
+│       │   │   ├── NEWS.template
+│       │   │   ├── po/
+│       │   │   │   ├── ChangeLog.template
+│       │   │   │   ├── LINGUAS.template
+│       │   │   │   └── POTFILES.template
+│       │   │   ├── README.template
+│       │   │   └── src/
+│       │   │       ├── main.template
+│       │   │       └── Makefile.template
+│       │   └── dbus_server/
+│       │       ├── AUTHORS.template
+│       │       ├── autogen.template
+│       │       ├── ChangeLog.template
+│       │       ├── configure.template
+│       │       ├── COPYING.template
+│       │       ├── Makefile.template
+│       │       ├── NEWS.template
+│       │       ├── po/
+│       │       │   ├── ChangeLog.template
+│       │       │   ├── LINGUAS.template
+│       │       │   └── POTFILES.template
+│       │       ├── README.template
+│       │       └── src/
+│       │           ├── main.template
+│       │           └── Makefile.template
+│       └── posix_py/
+│           ├── dbus_client/
+│           │   ├── AUTHORS.template
+│           │   ├── autogen.template
+│           │   ├── ChangeLog.template
+│           │   ├── configure.template
+│           │   ├── COPYING.template
+│           │   ├── Makefile.template
+│           │   ├── NEWS.template
+│           │   ├── README.template
+│           │   └── src/
+│           │       ├── dbus_client.template
+│           │       └── Makefile.template
+│           └── dbus_server/
+│               ├── AUTHORS.template
+│               ├── autogen.template
+│               ├── ChangeLog.template
+│               ├── configure.template
+│               ├── COPYING.template
+│               ├── Makefile.template
+│               ├── NEWS.template
+│               ├── README.template
+│               └── src/
+│                   ├── dbus_server.template
+│                   └── Makefile.template
+├── __init__.py
+├── log/
+│   └── gen_dbus.log
+├── pro/
+│   ├── config/
+│   │   ├── __init__.py
+│   │   └── pro_name.py
+│   ├── __init__.py
+│   ├── read_template.py
+│   └── write_template.py
+└── run/
+    └── gen_dbus_run.py
+</pre></div>
+</div>
+</section>
+<section id="copyright-and-licence">
+<h1>Copyright and licence<a class="headerlink" href="#copyright-and-licence" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="license: gpl v3" src="https://img.shields.io/badge/license-gplv3-blue.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/apache-2.0"><img alt="license: apache 2.0" src="https://img.shields.io/badge/license-apache%202.0-blue.svg" /></a></p>
+<p>Copyright (C) 2021 by <a class="reference external" href="https://vroncevic.github.io/gen_dbus">vroncevic.github.io/gen_dbus</a></p>
+<p><strong>gen_dbus</strong> is free software; you can redistribute it and/or modify
+it under the same terms as Python itself, either Python version 2.x/3.x or,
+at your option, any later version of Python 3 you may have available.</p>
+<p>🌎 🌍 🌏 Lets help and support PSF.</p>
+<p><a class="reference external" href="https://www.python.org/psf/"><img alt="python software foundation" src="https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/docs/psf-logo-alpha.png" /></a></p>
+<p><a class="reference external" href="https://psfmember.org/index.php?q=civicrm/contribute/transact&amp;reset=1&amp;id=2"><img alt="donate" src="https://www.paypalobjects.com/en_us/i/btn/btn_donatecc_lg.gif" /></a></p>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -62,11 +239,17 @@
 
 
 <h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Generate DBus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">gen_dbus</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="modules.html" title="next chapter">gen_dbus</a></li>
   </ul></li>
 </ul>
 </div>
@@ -96,7 +279,7 @@
       &copy;2021, Vladimir Roncevic <elektron.ronca@gmail.com>.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

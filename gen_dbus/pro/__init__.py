@@ -30,6 +30,7 @@ try:
     from gen_dbus.pro.write_template import WriteTemplate
     from ats_utilities.checker import ATSChecker
     from ats_utilities.config_io.base_check import FileChecking
+    from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.config_io.yaml.yaml2object import Yaml2Object
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
@@ -92,7 +93,7 @@ class DBus(FileChecking, ProConfig, ProName):
         self.check_format(project_structure, 'yaml', verbose=verbose)
         if self.is_file_ok():
             yml2obj = Yaml2Object(project_structure)
-            self.config = yml2obj.read_configuration()
+            self.__config = yml2obj.read_configuration()
 
     def get_reader(self):
         '''
@@ -113,6 +114,48 @@ class DBus(FileChecking, ProConfig, ProName):
             :exceptions: None
         '''
         return self.__writer
+
+    def select_pro_type(self, verbose=False):
+        '''
+            Select form type.
+
+            :param verbose: enable/disable verbose option.
+            :type verbose: <bool>
+            :return: project template/module selected | None.
+            :rtype: <dict>, <dict> | <NoneType>, <NoneType>
+            :exceptions: None
+        '''
+        template_selected, module_selected = None, None
+        if bool(self.__config):
+            types = self.__config['templates']
+            modules = self.__config['modules']
+            pro_types_len = len(types)
+            for index, pro_type in enumerate(types):
+                print(
+                    '{0} {1}'.format(index + 1, list(pro_type.keys())[0])
+                )
+                verbose_message(
+                    DBus.GEN_VERBOSE, verbose,
+                    'to be processed template', list(pro_type.keys())[0]
+                )
+            while True:
+                input_type = input(' select project type: ')
+                options = range(1, pro_types_len + 1, 1)
+                try:
+                    if int(input_type) in list(options):
+                        template_selected = types[int(input_type) - 1]
+                        module_selected = modules[int(input_type) - 1]
+                        break
+                    else:
+                        raise ValueError
+                except ValueError:
+                    error_message(
+                        DBus.GEN_VERBOSE, 'not an appropriate choice'
+                    )
+            verbose_message(
+                DBus.GEN_VERBOSE, verbose, 'selected', template_selected
+            )
+        return template_selected, module_selected
 
     def gen_setup(self, pro_name, verbose=False):
         '''
@@ -135,18 +178,21 @@ class DBus(FileChecking, ProConfig, ProName):
         if status == ATSChecker.VALUE_ERROR:
             raise ATSBadCallError(error)
         status, setup_content = False, None
+        templates, modules = self.select_pro_type(verbose=verbose)
         verbose_message(
-            DBus.GEN_VERBOSE, verbose, 'generating module', pro_name
+            DBus.GEN_VERBOSE, verbose, 'generating project', pro_name
         )
-        template_file, module = 'generator_test.template', 'generator_test.py'
-        if bool(template_file):
-            setup_content = self.__reader.read(
-                template_file, verbose=verbose
-            )
-            if setup_content:
-                status = self.__writer.write(
-                    setup_content, pro_name, module, verbose=verbose
+        if bool(templates) and bool(modules):
+            if 'cancel' not in templates or 'cancel' not in modules:
+                setup_content = self.__reader.read(
+                    templates, modules, verbose=verbose
                 )
+                if setup_content:
+                    status = self.__writer.write(
+                        setup_content, pro_name, verbose=verbose
+                    )
+            else:
+                status = True
         return status
 
     def __str__(self):

@@ -91,36 +91,50 @@ class ReadTemplate(FileChecking):
         '''
         return self.__template_dir
 
-    def read(self, template_module, verbose=False):
+    def read(self, templates, modules, verbose=False):
         '''
             Read template structure.
 
-            :param template_module: template module name.
-            :type template_module: <str>
+            :param templates: template modules.
+            :type templates: <dict>
+            :param modules: source modules.
+            :type modules: <dict>
             :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: template content for setup module | None.
-            :rtype: <str> | <NoneType>
+            :return: template content for project setup | None.
+            :rtype: <dict> | <NoneType>
             :exceptions: ATSTypeError | ATSBadCallError
         '''
         checker, error, status = ATSChecker(), None, False
         error, status = checker.check_params([
-            ('str:template_module', template_module)
+            ('dict:templates', templates), ('dict:modules', modules)
         ])
         if status == ATSChecker.TYPE_ERROR:
             raise ATSTypeError(error)
         if status == ATSChecker.VALUE_ERROR:
             raise ATSBadCallError(error)
-        setup_content, template_file = None, None
-        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'load template')
-        template_file = '{0}{1}'.format(self.__template_dir, template_module)
-        self.check_path(template_file, verbose=verbose)
-        self.check_mode('r', verbose=verbose)
-        self.check_format(template_file, 'template', verbose=verbose)
-        if self.is_file_ok():
-            with open(template_file, 'r') as setup_template:
-                setup_content = setup_template.read()
-        return setup_content
+        setup_content, setup_full_content = {}, {}
+        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'load templates')
+        dbus_templates = templates[list(templates.keys())[0]]
+        dbus_modules = modules[list(modules.keys())[0]]
+        for entity_template, entity_module in zip(dbus_templates, dbus_modules):
+            template_list = entity_template[list(entity_template.keys())[0]]
+            module_list = entity_module[list(entity_module.keys())[0]]
+            for template, module in zip(template_list, module_list):
+                template_file = '{0}{1}/{2}/{3}'.format(
+                    self.__template_dir, list(templates.keys())[0],
+                    list(entity_template.keys())[0], template
+                )
+                self.check_path(template_file, verbose=verbose)
+                self.check_mode('r', verbose=verbose)
+                self.check_format(
+                    template_file, 'template', verbose=verbose
+                )
+                if self.is_file_ok():
+                    with open(template_file, 'r') as setup_template:
+                        setup_content[module] = setup_template.read()
+            setup_full_content[list(entity_template.keys())[0]] = setup_content
+        return setup_full_content
 
     def __str__(self):
         '''
