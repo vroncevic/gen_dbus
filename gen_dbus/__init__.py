@@ -1,196 +1,236 @@
 # -*- coding: UTF-8 -*-
 
 '''
- Module
-     __init__.py
- Copyright
-     Copyright (C) 2021 Vladimir Roncevic <elektron.ronca@gmail.com>
-     gen_dbus is free software: you can redistribute it and/or modify it
-     under the terms of the GNU General Public License as published by the
-     Free Software Foundation, either version 3 of the License, or
-     (at your option) any later version.
-     gen_dbus is distributed in the hope that it will be useful, but
-     WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-     See the GNU General Public License for more details.
-     You should have received a copy of the GNU General Public License along
-     with this program. If not, see <http://www.gnu.org/licenses/>.
- Info
-     Defined class GenDBus with attribute(s) and method(s).
-     Load a base info, create an CLI interface and run operation(s).
+Module
+    __init__.py
+Copyright
+    Copyright (C) 2021 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    gen_dbus is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    gen_dbus is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see <http://www.gnu.org/licenses/>.
+Info
+    Defines class GenDBus with attribute(s) and method(s).
+    Loads a base info, creates an CLI interface and run operations.
 '''
 
 import sys
+from typing import Any, List, Dict
 from os.path import exists, dirname, realpath
+from argparse import Namespace
 
 try:
-    from six import add_metaclass
-    from gen_dbus.pro import DBus
     from ats_utilities.splash import Splash
     from ats_utilities.logging import ATSLogger
     from ats_utilities.cli.cfg_cli import CfgCLI
-    from ats_utilities.cooperative import CooperativeMeta
     from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.success import success_message
+    from ats_utilities.exceptions.ats_type_error import ATSTypeError
+    from ats_utilities.exceptions.ats_value_error import ATSValueError
+    from gen_dbus.pro import DBus
 except ImportError as ats_error_message:
-    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
-    sys.exit(MESSAGE)  # Force close python ATS ##############################
+    # Force close python ATS ##################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2021, https://vroncevic.github.io/gen_dbus'
-__credits__ = ['Vladimir Roncevic']
+__copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
+__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-@add_metaclass(CooperativeMeta)
 class GenDBus(CfgCLI):
     '''
-        Defined class GenDBus with attribute(s) and method(s).
-        Load a base info, create an CLI interface and run operation(s).
+        Defines class GenDBus with attribute(s) and method(s).
+        Loads a base info, creates an CLI interface and run operations.
+
         It defines:
 
             :attributes:
-                | GEN_VERBOSE - console text indicator for process-phase.
-                | CONFIG - tool info file path.
-                | LOG - tool log file path.
-                | LOGO - logo for splash screen.
-                | OPS - list of tool options.
-                | logger - logger object API.
+                | _GEN_VERBOSE - Console text indicator for process-phase.
+                | _CONFIG - Tool info file path.
+                | _LOG - Tool log file path.
+                | _LOGO - Logo for splash screen.
+                | _OPS - List of tool options.
+                | _logger - Logger object API.
             :methods:
-                | __init__ - initial constructor.
-                | process - process and run operation.
-                | __str__ - dunder method for GenDBus.
+                | __init__ - Initials GenDBus constructor.
+                | process - Processes and runs operations.
     '''
 
-    GEN_VERBOSE = 'GEN_DBUS'
-    CONFIG = '/conf/gen_dbus.cfg'
-    LOG = '/log/gen_dbus.log'
-    LOGO = '/conf/gen_dbus.logo'
-    OPS = ['-g', '--gen', '-v', '--verbose', '--version']
+    _GEN_VERBOSE: str = 'GEN_DBUS'
+    _CONFIG: str = '/conf/gen_dbus.cfg'
+    _LOG: str = '/log/gen_dbus.log'
+    _LOGO: str = '/conf/gen_dbus.logo'
+    _OPS: List[str] = [
+        '-g', '--gen', '-t', '--type', '-v', '--verbose', '--version'
+    ]
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose: bool = False) -> None:
         '''
-            Initial constructor.
+            Initials GenDBus constructor.
 
-            :param verbose: enable/disable verbose option.
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :exceptions: None
         '''
         current_dir = dirname(realpath(__file__))
-        gen_dbus_property = {
+        gen_dbus_property: Dict[str, str | bool] = {
             'ats_organization': 'vroncevic',
-            'ats_repository': 'gen_dbus',
-            'ats_name': 'gen_dbus',
-            'ats_logo_path': '{0}{1}'.format(current_dir, GenDBus.LOGO),
+            'ats_repository': f'{self._GEN_VERBOSE.lower()}',
+            'ats_name': f'{self._GEN_VERBOSE.lower()}',
+            'ats_logo_path': f'{current_dir}{self._LOGO}',
             'ats_use_github_infrastructure': True
         }
-        splash = Splash(gen_dbus_property, verbose=verbose)
-        base_info = '{0}{1}'.format(current_dir, GenDBus.CONFIG)
-        CfgCLI.__init__(self, base_info, verbose=verbose)
-        verbose_message(GenDBus.GEN_VERBOSE, verbose, 'init tool info')
-        self.logger = ATSLogger(
-            GenDBus.GEN_VERBOSE.lower(),
-            '{0}{1}'.format(current_dir, GenDBus.LOG),
-            verbose=verbose
+        Splash(gen_dbus_property, verbose)
+        base_info = f'{current_dir}{self._CONFIG}'
+        super().__init__(base_info, verbose)
+        verbose_message(
+            verbose, [f'{self._GEN_VERBOSE.lower()} init tool info']
+        )
+        self._logger: ATSLogger = ATSLogger(
+            self._GEN_VERBOSE.lower(), f'{current_dir}{self._LOG}', verbose
         )
         if self.tool_operational:
             self.add_new_option(
-                GenDBus.OPS[0], GenDBus.OPS[1],
-                dest='gen', help='generate option'
+                self._OPS[0], self._OPS[1],
+                dest='gen', help='generate project (provide name)'
             )
             self.add_new_option(
-                GenDBus.OPS[2], GenDBus.OPS[3],
+                self._OPS[2], self._OPS[3], dest='type',
+                help='set type of project (posix_c | posix_cxx | posix_py)'
+            )
+            self.add_new_option(
+                self._OPS[4], self._OPS[5],
                 action='store_true', default=False,
                 help='activate verbose mode for generation'
             )
             self.add_new_option(
-                GenDBus.OPS[4], action='version', version=__version__
+                self._OPS[6], action='version', version=__version__
             )
 
-    def process(self, verbose=False):
+    def process(self, verbose: bool = False) -> bool:
         '''
-            Process and run operation.
+            Processes and runs operations.
 
-            :param verbose: enable/disable verbose option.
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
-            :return: boolean status, True (success) | False.
+            :return: True (success operation) | False
             :rtype: <bool>
             :exceptions: None
         '''
         status = False
         if self.tool_operational:
-            num_of_args_sys = len(sys.argv)
-            if num_of_args_sys > 1:
-                operation = sys.argv[1]
-                if operation not in GenDBus.OPS:
-                    sys.argv.append('-h')
+            if len(sys.argv) >= 6:
+                if sys.argv[2] not in self._OPS:
+                    error_message(
+                        [
+                            f'{self._GEN_VERBOSE.lower()}',
+                            'provide name (-g app | --gen app)'
+                        ]
+                    )
+                    self._logger.write_log(
+                        'missing project name', self._logger.ATS_ERROR
+                    )
+                    return status
+                if sys.argv[4] not in self._OPS:
+                    error_message(
+                        [
+                            f'{self._GEN_VERBOSE.lower()}',
+                            'provide type (-t posix_c | --type posix_c)',
+                            'types: posix_c | posix_cxx | posix_py'
+                        ]
+                    )
+                    self._logger.write_log(
+                        'missing project type', self._logger.ATS_ERROR
+                    )
+                    return status
             else:
-                sys.argv.append('-h')
-            args = self.parse_args(sys.argv[1:])
-            pro_exists = exists(getattr(args, 'gen'))
-            if not pro_exists:
-                if bool(getattr(args, 'gen')):
+                error_message(
+                    [f'{self._GEN_VERBOSE.lower()} provide project name/type']
+                )
+                self._logger.write_log(
+                    'provide project name/type', self._logger.ATS_ERROR
+                )
+                return status
+            args: Any | Namespace = self.parse_args(sys.argv[2:])
+            if not exists(getattr(args, 'gen')):
+                if bool(getattr(args, 'gen')) and bool(getattr(args, 'type')):
                     print(
-                        '{0} {1} [{2}]'.format(
-                            '[{0}]'.format(GenDBus.GEN_VERBOSE.lower()),
-                            'generating', getattr(args, 'gen')
+                        " ".join([
+                            f'[{self._GEN_VERBOSE.lower()}]',
+                            'gen DBUS project skeleton',
+                            str(getattr(args, 'gen')),
+                            str(getattr(args, 'type'))
+                        ])
+                    )
+                    generator: DBus = DBus(
+                        getattr(args, 'verbose') or verbose
+                    )
+                    try:
+                        status = generator.gen_setup(
+                            f'{getattr(args, "gen")}',
+                            f'{getattr(args, "type")}',
+                            getattr(args, 'verbose') or verbose
                         )
-                    )
-                    generator = DBus(verbose=verbose)
-                    status = generator.gen_setup(
-                        getattr(args, 'gen'), verbose
-                    )
+                    except (ATSTypeError, ATSValueError) as e:
+                        error_message(
+                            [f'{self._GEN_VERBOSE.lower()} {str(e)}']
+                        )
+                        self._logger.write_log(
+                            f'{str(e)}', self._logger.ATS_ERROR
+                        )
                     if status:
-                        success_message(GenDBus.GEN_VERBOSE, 'done\n')
-                        self.logger.write_log(
-                            '{0} {1} done'.format(
-                                'generating tool/gen',
-                                getattr(args, 'gen')
-                            ), ATSLogger.ATS_INFO
+                        success_message(
+                            [f'{self._GEN_VERBOSE.lower()} done\n']
+                        )
+                        self._logger.write_log(
+                            f'gen pro {getattr(args, "gen")} done',
+                            self._logger.ATS_INFO
                         )
                     else:
                         error_message(
-                            GenDBus.GEN_VERBOSE, 'generation failed'
+                            [f'{self._GEN_VERBOSE.lower()} generation failed']
                         )
-                        self.logger.write_log(
-                            'generation failed', ATSLogger.ATS_ERROR
+                        self._logger.write_log(
+                            'generation failed', self._logger.ATS_ERROR
                         )
                 else:
                     error_message(
-                        GenDBus.GEN_VERBOSE, 'provide project name'
+                        [
+                            f'{self._GEN_VERBOSE.lower()}',
+                            'provide project name/type'
+                        ]
                     )
-                    self.logger.write_log(
-                        'provide project name', ATSLogger.ATS_ERROR
+                    self._logger.write_log(
+                        'missing project name/type', self._logger.ATS_ERROR
                     )
             else:
                 error_message(
-                    GenDBus.GEN_VERBOSE, 'project already exist'
+                    [
+                        f'{self._GEN_VERBOSE.lower()}',
+                        f'project with name [{getattr(args, "gen")}] exists'
+                    ]
                 )
-                self.logger.write_log(
-                    'project already exist', ATSLogger.ATS_ERROR
+                self._logger.write_log(
+                    f'project with name [{getattr(args, "gen")}] exists',
+                    self._logger.ATS_ERROR
                 )
         else:
             error_message(
-                GenDBus.GEN_VERBOSE, 'tool is not operational'
+                [f'{self._GEN_VERBOSE.lower()} tool is not operational']
             )
-            self.logger.write_log(
-                'tool is not operational', ATSLogger.ATS_ERROR
+            self._logger.write_log(
+                'tool is not operational', self._logger.ATS_ERROR
             )
         return status
-
-    def __str__(self):
-        '''
-            Dunder method for GenDBus.
-
-            :return: object in a human-readable format.
-            :rtype: <str>
-            :exceptions: None
-        '''
-        return '{0} ({1}, {2})'.format(
-            self.__class__.__name__, CfgCLI.__str__(self), str(self.logger)
-        )

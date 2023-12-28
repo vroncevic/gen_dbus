@@ -18,4 +18,3 @@
 
 bin_PROGRAMS = ${PRO}
 ${PRO}_SOURCES = main.c
-

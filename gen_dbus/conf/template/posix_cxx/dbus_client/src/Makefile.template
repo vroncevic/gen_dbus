@@ -19,4 +19,3 @@ ${PRO}_SOURCES = \
 ${PRO}_LDFLAGS = 
 
 ${PRO}_LDADD = 
-

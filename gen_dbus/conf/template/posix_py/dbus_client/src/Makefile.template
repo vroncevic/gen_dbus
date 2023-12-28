@@ -10,4 +10,3 @@ ${PRO}dir = $$(pythondir)/${PRO}
 
 ${PRO}_PYTHON = \
     ${PRO}.py
-

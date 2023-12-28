@@ -1,14 +1,6 @@
 gen\_dbus.pro package
 =====================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   gen_dbus.pro.config
-
 Submodules
 ----------
 

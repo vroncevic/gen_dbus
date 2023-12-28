@@ -25,4 +25,3 @@ AC_OUTPUT([
     src/Makefile
     po/Makefile.in
 ])
-
