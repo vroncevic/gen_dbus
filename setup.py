@@ -21,6 +21,7 @@
 '''
 
 from __future__ import print_function
+from typing import List
 from os.path import abspath, dirname, join
 from setuptools import setup
 
