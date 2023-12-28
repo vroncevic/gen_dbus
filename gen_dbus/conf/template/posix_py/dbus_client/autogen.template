@@ -1,4 +1,5 @@
 #!/bin/sh
+#
 # @brief          Run this to generate all the initial makefiles, etc.
 # @version        ver.2.0
 # @date           Thu Feb  2 13:04:53 CET 2017

@@ -1,150 +1,146 @@
 # -*- coding: UTF-8 -*-
 
 '''
- Module
-     read_template.py
- Copyright
-     Copyright (C) 2021 Vladimir Roncevic <elektron.ronca@gmail.com>
-     gen_dbus is free software: you can redistribute it and/or modify it
-     under the terms of the GNU General Public License as published by the
-     Free Software Foundation, either version 3 of the License, or
-     (at your option) any later version.
-     gen_dbus is distributed in the hope that it will be useful, but
-     WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-     See the GNU General Public License for more details.
-     You should have received a copy of the GNU General Public License along
-     with this program. If not, see <http://www.gnu.org/licenses/>.
- Info
-     Defined class ReadTemplate with attribute(s) and method(s).
-     Created API for read a template file and return a content.
+Module
+    read_template.py
+Copyright
+    Copyright (C) 2021 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
+    gen_dbus is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    gen_dbus is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see <http://www.gnu.org/licenses/>.
+Info
+    Defines class ReadTemplate with attribute(s) and method(s).
+    Creates an API for reading a template files.
 '''
 
 import sys
-from os.path import isdir, dirname, realpath
+from typing import Any, List, Dict, Tuple
+from os.path import dirname, realpath
 
 try:
-    from ats_utilities.checker import ATSChecker
-    from ats_utilities.config_io.base_check import FileChecking
+    from ats_utilities.config_io.file_check import FileCheck
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
-    from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
+    from ats_utilities.exceptions.ats_value_error import ATSValueError
 except ImportError as ats_error_message:
-    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
-    sys.exit(MESSAGE)  # Force close python ATS ##############################
+    # Force close python ATS ##################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2021, https://vroncevic.github.io/gen_dbus'
-__credits__ = ['Vladimir Roncevic']
+__copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
+__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class ReadTemplate(FileChecking):
+class ReadTemplate(FileCheck):
     '''
-        Defined class ReadTemplate with attribute(s) and method(s).
-        Created API for read a template file and return a content.
+        Defines class ReadTemplate with attribute(s) and method(s).
+        Creates an API for reading a template files.
+
         It defines:
 
             :attributes:
-                | GEN_VERBOSE - console text indicator for process-phase.
-                | TEMPLATE_DIR - template dir path.
-                | __template_dir - absolute file path of template dir.
+                | _GEN_VERBOSE - Console text indicator for process-phase.
+                | _TEMPLATE_DIR - Template dir path.
             :methods:
-                | __init__ - initial constructor.
-                | get_template_dir - getter for template directory object.
-                | read - read a template and return a string representation.
-                | __str__ - dunder method for ReadTemplate.
+                | __init__ - Initials ReadTemplate constructor.
+                | read - Reads a templates.
     '''
 
-    GEN_VERBOSE = 'GEN_DBUS::PRO::READ_TEMPLATE'
-    TEMPLATE_DIR = '/../conf/template/'
+    _GEN_VERBOSE: str = 'GEN_DBUS::PRO::READ_TEMPLATE'
+    _TEMPLATE_DIR: str = '/../conf/template/'
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose: bool = False) -> None:
         '''
-            Initial constructor.
+            Initials ReadTemplate constructor.
 
-            :param verbose: enable/disable verbose option.
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :exceptions: None
         '''
-        FileChecking.__init__(self, verbose=verbose)
-        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'init reader')
-        template_dir = '{0}{1}'.format(
-            dirname(realpath(__file__)), ReadTemplate.TEMPLATE_DIR
-        )
-        check_template_dir = isdir(template_dir)
-        if check_template_dir:
-            self.__template_dir = template_dir
-        else:
-            self.__template_dir = None
+        super().__init__(verbose)
+        verbose_message(verbose, [f'{self._GEN_VERBOSE} init reader'])
 
-    def get_template_dir(self):
+    def read(
+        self,
+        pro_setup: Dict[Any, Any],
+        pro_type: str | None,
+        verbose: bool = False
+    ) -> List[Tuple[Dict[str, str], Dict[str, str]]]:
         '''
-            Getter for template directory.
+            Reads a templates.
 
-            :return: template directory path | None.
-            :rtype: <str> | <NoneType>
-        '''
-        return self.__template_dir
-
-    def read(self, templates, modules, verbose=False):
-        '''
-            Read template structure.
-
-            :param templates: template modules.
-            :type templates: <dict>
-            :param modules: source modules.
-            :type modules: <dict>
-            :param verbose: enable/disable verbose option.
+            :param pro_setup: Project templates
+            :type pro_setup: <Dict[Any, Any]>
+            :param pro_type: Project type | None
+            :type pro_type: <str> | <NoneType>
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
-            :return: template content for project setup | None.
-            :rtype: <dict> | <NoneType>
+            :return: Template files for project setup
+            :rtype: <dict>
             :exceptions: ATSTypeError | ATSBadCallError
         '''
-        checker, error, status = ATSChecker(), None, False
-        error, status = checker.check_params([
-            ('dict:templates', templates), ('dict:modules', modules)
+        error_msg: str | None = None
+        error_id: int | None = None
+        error_msg, error_id = self.check_params([
+            ('dict:pro_setup', pro_setup), ('str:pro_type', pro_type)
         ])
-        if status == ATSChecker.TYPE_ERROR:
-            raise ATSTypeError(error)
-        if status == ATSChecker.VALUE_ERROR:
-            raise ATSBadCallError(error)
-        setup_content, setup_full_content = {}, {}
-        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'load templates')
-        dbus_templates = templates[list(templates.keys())[0]]
-        dbus_modules = modules[list(modules.keys())[0]]
-        for entity_template, entity_module in zip(dbus_templates, dbus_modules):
-            template_list = entity_template[list(entity_template.keys())[0]]
-            module_list = entity_module[list(entity_module.keys())[0]]
-            for template, module in zip(template_list, module_list):
-                template_file = '{0}{1}/{2}/{3}'.format(
-                    self.__template_dir, list(templates.keys())[0],
-                    list(entity_template.keys())[0], template
-                )
-                self.check_path(template_file, verbose=verbose)
-                self.check_mode('r', verbose=verbose)
-                self.check_format(
-                    template_file, 'template', verbose=verbose
-                )
-                if self.is_file_ok():
-                    with open(template_file, 'r') as setup_template:
-                        setup_content[module] = setup_template.read()
-            setup_full_content[list(entity_template.keys())[0]] = setup_content
-        return setup_full_content
-
-    def __str__(self):
-        '''
-            Dunder method for ReadTemplate.
-
-            :return: object in a human-readable format.
-            :rtype: <str>
-            :exceptions: None
-        '''
-        return '{0} ({1}, {2})'.format(
-            self.__class__.__name__, FileChecking.__str__(self),
-            self.__template_dir
-        )
+        if error_id == self.TYPE_ERROR:
+            raise ATSTypeError(error_msg)
+        if not bool(pro_setup):
+            raise ATSValueError('missing templates')
+        if not bool(pro_type):
+            raise ATSValueError('missing project type')
+        pro_content: List[Tuple[Dict[str, str], Dict[str, str]]] = []
+        pro_index: int | None = None
+        if pro_type in pro_setup['templates'][0].keys():
+            pro_index = 0
+        elif pro_type in pro_setup['templates'][1].keys():
+            pro_index = 1
+        elif pro_type in pro_setup['templates'][2].keys():
+            pro_index = 2
+        else:
+            return pro_content
+        type_templates: List[str] = pro_setup['templates'][pro_index][pro_type]
+        type_modules: List[str] = pro_setup['modules'][pro_index][pro_type]
+        client_templates: List[str] = type_templates[0]['dbus_client']
+        server_templates: List[str] = type_templates[1]['dbus_server']
+        client_modules: List[str] = type_modules[0]['dbus_client']
+        server_modules: List[str] = type_modules[1]['dbus_server']
+        for key_cl_module, cl_module, key_sr_module, sr_module in zip(
+            client_modules, client_templates, server_modules, server_templates
+        ):
+            module_content: str | None = None
+            template_content: str | None = None
+            current_dir: str = dirname(realpath(__file__))
+            template_dir: str = f'{current_dir}{self._TEMPLATE_DIR}'
+            cl_module = f'{template_dir}{pro_type}/dbus_client/{cl_module}'
+            self.check_path(cl_module, verbose)
+            self.check_mode('r', verbose)
+            self.check_format(cl_module, 'template', verbose)
+            if self.is_file_ok():
+                with open(cl_module, 'r', encoding='utf-8') as setup_client:
+                    module_content = setup_client.read()
+            sr_module = f'{template_dir}{pro_type}/dbus_server/{sr_module}'
+            self.check_path(sr_module, verbose)
+            self.check_mode('r', verbose)
+            self.check_format(sr_module, 'template', verbose)
+            if self.is_file_ok():
+                with open(sr_module, 'r', encoding='utf-8') as setup_server:
+                    template_content = setup_server.read()
+            pro_content.append((
+                {key_cl_module: module_content},
+                {key_sr_module: template_content}
+            ))
+        return pro_content

@@ -74,8 +74,6 @@ templates:
       - README.template
       - src/dbus_server.template
       - src/Makefile.template
-  - cancel: null
-
 modules:
   - posix_c:
     - dbus_client:
@@ -152,4 +150,3 @@ modules:
       - README.md
       - src/dbus_client.py
       - src/Makefile.am
-  - cancel: null

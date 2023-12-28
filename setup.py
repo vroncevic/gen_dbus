@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-"""
+'''
  Module
      setup.py
  Copyright
-     Copyright (C) 2021 Vladimir Roncevic <elektron.ronca@gmail.com>
+     Copyright (C) 2021 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
      gen_dbus is free software: you can redistribute it and/or
      modify it under the terms of the GNU General Public License as published
      by the Free Software Foundation, either version 3 of the License, or
@@ -18,74 +18,28 @@
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
      Define setup for tool gen_dbus.
-"""
+'''
 
 from __future__ import print_function
-import sys
-from os.path import abspath, dirname, join, exists
+from os.path import abspath, dirname, join
 from setuptools import setup
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2021, https://vroncevic.github.io/gen_dbus'
-__credits__ = ['Vladimir Roncevic']
+__copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
+__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
-
-def install_directory():
-    '''
-        Return the installation directory, or None.
-
-        :return: path (success) | None.
-        :rtype: <str> | <NoneType>
-        :exceptions: None
-    '''
-    py_version = '{0}.{1}'.format(sys.version_info[0], sys.version_info[1])
-    if '--github' in sys.argv:
-        index = sys.argv.index('--github')
-        sys.argv.pop(index)
-        paths = (
-            '{0}/lib/python{1}/dist-packages/'.format(sys.prefix, py_version),
-            '{0}/lib/python{1}/site-packages/'.format(sys.prefix, py_version)
-        )
-    else:
-        paths = (s for s in (
-            '{0}/local/lib/python{1}/dist-packages/'.format(
-                sys.prefix, py_version
-            ),
-            '{0}/local/lib/python{1}/site-packages/'.format(
-                sys.prefix, py_version
-            )
-        ))
-    message = None
-    for path in paths:
-        message = '[setup] check path {0}'.format(path)
-        print(message)
-        if exists(path):
-            message = '[setup] use path {0}'.format(path)
-            print(message)
-            return path
-    message = '[setup] no installation path found, check {0}\n'.format(
-        sys.prefix
-    )
-    print(message)
-    return None
-
-
-INSTALL_DIR = install_directory()
 TOOL_DIR = 'gen_dbus/'
 CONF, TEMPLATE, LOG = 'conf', 'conf/template', 'log'
 POSIX_C = 'template/posix_c'
 POSIX_CC = 'template/posix_cxx'
 POSIX_PY = 'template/posix_py'
-if not bool(INSTALL_DIR):
-    print('[setup] force exit from install process')
-    sys.exit(127)
 THIS_DIR, LONG_DESCRIPTION = abspath(dirname(__file__)), None
-with open(join(THIS_DIR, 'README.md')) as readme:
+with open(join(THIS_DIR, 'README.md'), encoding='utf-8') as readme:
     LONG_DESCRIPTION = readme.read()
 PROGRAMMING_LANG = 'Programming Language :: Python ::'
 VERSIONS = ['2.7', '3', '3.2', '3.3', '3.4']
@@ -106,7 +60,7 @@ APPROVED_LICENSES = [
 PYP_CLASSIFIERS = SUPPORTED_PY_VERSIONS + APPROVED_LICENSES
 setup(
     name='gen_dbus',
-    version='1.0.0',
+    version='1.1.0',
     description='Generating DBus modules',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
