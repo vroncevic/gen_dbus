@@ -1,21 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>gen_dbus.pro.read_template module &#8212; gen_dbus https://github.com/vroncevic/gen_dbus/releases documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/documentation_options.js?v=265dd239"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,7 +47,7 @@
           <div class="body" role="main">
             
   <section id="module-gen_dbus.pro.read_template">
-<span id="gen-dbus-pro-read-template-module"></span><h1>gen_dbus.pro.read_template module<a class="headerlink" href="#module-gen_dbus.pro.read_template" title="Permalink to this heading">¶</a></h1>
+<span id="gen-dbus-pro-read-template-module"></span><h1>gen_dbus.pro.read_template module<a class="headerlink" href="#module-gen_dbus.pro.read_template" title="Link to this heading">¶</a></h1>
 <dl class="simple">
 <dt>Module</dt><dd><p>read_template.py</p>
 </dd>
@@ -73,7 +69,7 @@ Creates an API for reading a template files.</p>
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gen_dbus.pro.read_template.</span></span><span class="sig-name descname"><span class="pre">ReadTemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_dbus/pro/read_template.html#ReadTemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gen_dbus.pro.read_template.</span></span><span class="sig-name descname"><span class="pre">ReadTemplate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_dbus/pro/read_template.html#ReadTemplate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">FileCheck</span></code></p>
 <p>Defines class ReadTemplate with attribute(s) and method(s).
 Creates an API for reading a template files.</p>
@@ -84,29 +80,112 @@ Creates an API for reading a template files.</p>
 <dd class="field-odd"><div class="line-block">
 <div class="line">_GEN_VERBOSE - Console text indicator for process-phase.</div>
 <div class="line">_TEMPLATE_DIR - Template dir path.</div>
+<div class="line">_POSIX_C_TYPE - Posix C project type id.</div>
+<div class="line">_POSIX_CXX_TYPE - Posix C++ project type id.</div>
+<div class="line">_POSIX_PY_TYPE - Posix Python project type id.</div>
+<div class="line">_NOT_SUPPORTED - Not supported project type id.</div>
+<div class="line">_DBUS_CLIENT - DBUS client section name.</div>
+<div class="line">_DBUS_SERVER - DBUS server section name.</div>
 </div>
 </dd>
 <dt class="field-even">methods<span class="colon">:</span></dt>
 <dd class="field-even"><div class="line-block">
 <div class="line">__init__ - Initials ReadTemplate constructor.</div>
+<div class="line">_get_artifacts - Gets artifacts from project configuration.</div>
 <div class="line">read - Reads a templates.</div>
 </div>
 </dd>
 </dl>
 </div></blockquote>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._DBUS_CLIENT">
+<span class="sig-name descname"><span class="pre">_DBUS_CLIENT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dbus_client'</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._DBUS_CLIENT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._DBUS_SERVER">
+<span class="sig-name descname"><span class="pre">_DBUS_SERVER</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dbus_server'</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._DBUS_SERVER" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._GEN_VERBOSE">
-<span class="sig-name descname"><span class="pre">_GEN_VERBOSE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GEN_DBUS::PRO::READ_TEMPLATE'</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._GEN_VERBOSE" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_GEN_VERBOSE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GEN_DBUS::PRO::READ_TEMPLATE'</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._GEN_VERBOSE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._NOT_SUPPORTED">
+<span class="sig-name descname"><span class="pre">_NOT_SUPPORTED</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._NOT_SUPPORTED" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._POSIX_CXX_TYPE">
+<span class="sig-name descname"><span class="pre">_POSIX_CXX_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._POSIX_CXX_TYPE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._POSIX_C_TYPE">
+<span class="sig-name descname"><span class="pre">_POSIX_C_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._POSIX_C_TYPE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._POSIX_PY_TYPE">
+<span class="sig-name descname"><span class="pre">_POSIX_PY_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._POSIX_PY_TYPE" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._TEMPLATE_DIR">
-<span class="sig-name descname"><span class="pre">_TEMPLATE_DIR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/../conf/template/'</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._TEMPLATE_DIR" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_TEMPLATE_DIR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/../conf/template/'</span></em><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._TEMPLATE_DIR" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._get_artifacts">
+<span class="sig-name descname"><span class="pre">_get_artifacts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pro_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pro_setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pro_artifact_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gen_dbus/pro/read_template.html#ReadTemplate._get_artifacts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._get_artifacts" title="Link to this definition">¶</a></dt>
+<dd><p>Gets artifacts from project configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pro_type</strong> (<em>&lt;str&gt;</em>) – Project type</p></li>
+<li><p><strong>pro_setup</strong> (<em>&lt;dict&gt;</em>) – Project configuration</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Project modules (client and server)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;Tuple[List[str], List[str]]&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><p>ATSTypeError | ATSValueError</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate._get_template_type_id">
+<span class="sig-name descname"><span class="pre">_get_template_type_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pro_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pro_setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/gen_dbus/pro/read_template.html#ReadTemplate._get_template_type_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate._get_template_type_id" title="Link to this definition">¶</a></dt>
+<dd><p>Gets project type id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pro_type</strong> (<em>&lt;str&gt;</em>) – Project type</p></li>
+<li><p><strong>pro_setup</strong> (<em>&lt;dict&gt;</em>) – Project configuration</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Project type ID (0 | 1 | 2 | -1)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;int&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><p>ATSTypeError | ATSValueError</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="gen_dbus.pro.read_template.ReadTemplate.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pro_setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pro_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gen_dbus/pro/read_template.html#ReadTemplate.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pro_setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pro_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gen_dbus/pro/read_template.html#ReadTemplate.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_dbus.pro.read_template.ReadTemplate.read" title="Link to this definition">¶</a></dt>
 <dd><p>Reads a templates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -120,10 +199,10 @@ Creates an API for reading a template files.</p>
 <dd class="field-even"><p>Template files for project setup</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>&lt;dict&gt;</p>
+<dd class="field-odd"><p>&lt;List[Tuple[Dict[str, str], Dict[str, str]]]&gt;</p>
 </dd>
 <dt class="field-even">Exceptions<span class="colon">:</span></dt>
-<dd class="field-even"><p>ATSTypeError | ATSBadCallError</p>
+<dd class="field-even"><p>ATSTypeError | ATSValueError</p>
 </dd>
 </dl>
 </dd></dl>
@@ -144,8 +223,16 @@ Creates an API for reading a template files.</p>
     <ul>
 <li><a class="reference internal" href="#">gen_dbus.pro.read_template module</a><ul>
 <li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate"><code class="docutils literal notranslate"><span class="pre">ReadTemplate</span></code></a><ul>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._DBUS_CLIENT"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._DBUS_CLIENT</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._DBUS_SERVER"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._DBUS_SERVER</span></code></a></li>
 <li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._GEN_VERBOSE"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._GEN_VERBOSE</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._NOT_SUPPORTED"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._NOT_SUPPORTED</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._POSIX_CXX_TYPE"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._POSIX_CXX_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._POSIX_C_TYPE"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._POSIX_C_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._POSIX_PY_TYPE"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._POSIX_PY_TYPE</span></code></a></li>
 <li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._TEMPLATE_DIR"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._TEMPLATE_DIR</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._get_artifacts"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._get_artifacts()</span></code></a></li>
+<li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate._get_template_type_id"><code class="docutils literal notranslate"><span class="pre">ReadTemplate._get_template_type_id()</span></code></a></li>
 <li><a class="reference internal" href="#gen_dbus.pro.read_template.ReadTemplate.read"><code class="docutils literal notranslate"><span class="pre">ReadTemplate.read()</span></code></a></li>
 </ul>
 </li>
@@ -208,8 +295,8 @@ Creates an API for reading a template files.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

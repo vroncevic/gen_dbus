@@ -29,6 +29,7 @@ from string import Template
 try:
     from ats_utilities.config_io.file_check import FileCheck
     from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.console_io.error import error_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_value_error import ATSValueError
 except ImportError as ats_error_message:
@@ -39,7 +40,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -72,6 +73,32 @@ class WriteTemplate(FileCheck):
         super().__init__(verbose)
         verbose_message(verbose, [f'{self._GEN_VERBOSE} init writer'])
 
+    def is_empty_substructure(
+        self, pro_setup: List[Tuple[Dict[str, str], Dict[str, str]]]
+    ) -> bool:
+        '''
+            Check empty substructure.
+
+            :param pro_setup: Project templates
+            :type pro_setup: <List[Tuple[Dict[str, str], Dict[str, str]]]>
+            :return: True (detect empty section) | False
+            :rtype: <bool>
+            :exception: ATSTypeError | ATSValueError
+        '''
+        error_msg: str | None = None
+        error_id: int | None = None
+        error_msg, error_id = self.check_params([
+            ('list:pro_setup', pro_setup)
+        ])
+        if error_id == self.TYPE_ERROR:
+            raise ATSTypeError(error_msg)
+        if not bool(pro_setup):
+            raise ATSValueError('missing project configuration')
+        for tpl in pro_setup:
+            if not tpl or any(not d for d in tpl):
+                return True
+        return False
+
     def write(
         self,
         pro_setup: List[Tuple[Dict[str, str], Dict[str, str]]],
@@ -102,7 +129,10 @@ class WriteTemplate(FileCheck):
         if error_id == self.TYPE_ERROR:
             raise ATSTypeError(error_msg)
         if not bool(pro_setup):
-            raise ATSValueError('missing project templates')
+            raise ATSValueError('missing project configuration')
+        if self.is_empty_substructure(pro_setup):
+            error_message([f'{self._GEN_VERBOSE} empty substructure'])
+            return False
         if not bool(pro_name):
             raise ATSValueError('missing project name')
         if not bool(pro_type):
@@ -123,10 +153,11 @@ class WriteTemplate(FileCheck):
             client: Dict[str, str] = entity[0]
             server: Dict[str, str] = entity[1]
             for key, value in client.items():
-                if any([not bool(value), not bool(key)]):
-                    return False
-                template = Template(value)
-                if not bool(template):
+                if all([bool(value), bool(key)]):
+                    template = Template(value)
+                    if not bool(template):
+                        return False
+                else:
                     return False
                 module: str = f'{work_dir}/{pro_name}/dbus_client/{key}'
                 with open(module, 'w', encoding='utf-8') as module_file:

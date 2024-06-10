@@ -68,3 +68,38 @@
 12/28/2023 08:23:58 PM - INFO - gen pro latest done
 12/28/2023 08:23:59 PM - ERROR - tool is not operational
 12/28/2023 08:24:01 PM - ERROR - provide project name/type
+06/10/2024 10:40:37 PM - ERROR - tool is not operational
+06/10/2024 11:18:34 PM - ERROR - tool is not operational
+06/10/2024 11:45:14 PM - ERROR - 
+mod: /data/dev/python/3_tools/gen_dbus/github/gen_dbus/tests/gen_dbus/pro/write_template.py
+  def: write() 
+    expected pro_setup <tuple> object at 0x7f7540fdb180 wrong type 
+    expected pro_name <str> object at 0x7f75411650e0 
+    expected pro_type <str> object at 0x7f7541112f40 format wrong during checking params
+06/10/2024 11:45:14 PM - ERROR - generation failed
+06/10/2024 11:45:15 PM - ERROR - tool is not operational
+06/10/2024 11:48:49 PM - ERROR - 
+mod: /data/dev/python/3_tools/gen_dbus/github/gen_dbus/tests/gen_dbus/pro/write_template.py
+  def: write() 
+    expected pro_setup <tuple> object at 0x75beb96a2d00 wrong type 
+    expected pro_name <str> object at 0x75beb984cc00 
+    expected pro_type <str> object at 0x75beb984c810 format wrong during checking params
+06/10/2024 11:48:49 PM - ERROR - generation failed
+06/10/2024 11:48:50 PM - ERROR - tool is not operational
+06/10/2024 11:56:05 PM - INFO - generation latest done
+06/10/2024 11:56:06 PM - ERROR - tool is not operational
+06/10/2024 11:59:28 PM - INFO - generation latest done
+06/10/2024 11:59:29 PM - ERROR - tool is not operational
+06/11/2024 12:03:30 AM - ERROR - missing project configuration
+06/11/2024 12:03:30 AM - ERROR - generation failed
+06/11/2024 12:03:31 AM - ERROR - tool is not operational
+06/11/2024 12:13:30 AM - ERROR - generation failed
+06/11/2024 12:13:31 AM - ERROR - tool is not operational
+06/11/2024 12:18:56 AM - INFO - generation latest done
+06/11/2024 12:18:57 AM - ERROR - tool is not operational
+06/11/2024 12:19:40 AM - INFO - generation latest done
+06/11/2024 12:19:42 AM - ERROR - tool is not operational
+06/11/2024 12:20:42 AM - INFO - generation latest done
+06/11/2024 12:20:43 AM - ERROR - tool is not operational
+06/11/2024 12:21:55 AM - INFO - generation latest done
+06/11/2024 12:21:56 AM - ERROR - tool is not operational
