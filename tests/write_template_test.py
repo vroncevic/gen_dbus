@@ -23,7 +23,7 @@ Execute
 '''
 
 import sys
-from typing import Any, List, Dict
+from typing import Any, Tuple, Dict, List
 from os.path import dirname, realpath
 from unittest import TestCase, main
 
@@ -41,7 +41,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -80,7 +80,7 @@ class WriteTemplateTestCase(TestCase):
     def test_write_template_empty(self) -> None:
         '''Test write templates empty'''
         template = WriteTemplate()
-        templates: List[Dict[str, str], Dict[str, str]] = []
+        templates: List[Tuple[Dict[str, str], Dict[str, str]]] = []
         with self.assertRaises(ATSValueError):
             self.assertFalse(
                 template.write(templates, 'empty_simple_test', 'posix_c')
@@ -91,7 +91,9 @@ class WriteTemplateTestCase(TestCase):
         template = WriteTemplate()
         with self.assertRaises(ATSTypeError):
             self.assertFalse(
-                template.write(None, 'none_simple_test', 'posix_c')
+                template.write(
+                    None, 'none_simple_test', 'posix_c'  # type: ignore
+                )
             )
 
     def test_write_template(self) -> None:
@@ -102,9 +104,9 @@ class WriteTemplateTestCase(TestCase):
         yml2obj = Yaml2Object(pro_structure)
         template_cfg: Dict[Any, Any] = yml2obj.read_configuration()
         template_write = WriteTemplate()
-        pro_setup: List[Dict[str, str], Dict[str, str]] = template_read.read(
-            template_cfg, 'posix_c'
-        )
+        pro_setup: List[
+            Tuple[Dict[str, str], Dict[str, str]]
+        ] = template_read.read(template_cfg, 'posix_c')
         self.assertTrue(
             template_write.write(pro_setup, 'new_simple_test', 'posix_c')
         )

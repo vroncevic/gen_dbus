@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List, Dict
+from typing import List, Dict, Tuple
 from os.path import dirname, realpath
 
 try:
@@ -42,7 +42,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -114,10 +114,7 @@ class DBus(FileCheck, ProConfig, ProName):
         return self._writer
 
     def gen_setup(
-        self,
-        pro_name: str | None,
-        pro_type: str | None,
-        verbose: bool = False
+        self, pro_name: str | None, pro_type: str | None, verbose: bool = False
     ) -> bool:
         '''
             Generate module generator_test.py.
@@ -143,16 +140,21 @@ class DBus(FileCheck, ProConfig, ProName):
             raise ATSValueError('missing project name')
         if not bool(pro_type):
             raise ATSValueError('missing project type')
-        status: bool = False
+        if not bool(self.config):
+            raise ATSValueError('missing project configuration')
         verbose_message(
             verbose, [
                 f'{self._GEN_VERBOSE.lower()} generating project',
                 pro_name, 'type of', pro_type
             ]
         )
-        pro_setup: List[Dict[str, str], Dict[str, str]] = self._reader.read(
-            self.config, pro_type, verbose
-        )
-        if bool(pro_setup):
-            status = self._writer.write(pro_setup, pro_name, pro_type, verbose)
+        status: bool = False
+        if bool(self._reader) and bool(self._writer):
+            pro_setup: List[
+                Tuple[Dict[str, str], Dict[str, str]]
+            ] = self._reader.read(self.config, pro_type, verbose)
+            if bool(pro_setup):
+                status = self._writer.write(
+                    pro_setup, pro_name, pro_type, verbose
+                )
         return status

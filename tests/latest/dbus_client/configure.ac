@@ -1,6 +1,6 @@
 dnl
 dnl configure.ac
-dnl Copyright (C) 2023 Vladimir Roncevic <elektron.ronca@gmail.com>
+dnl Copyright (C) 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
 dnl
 dnl latest is free software: you can redistribute it and/or modify it
 dnl under the terms of the GNU General Public License as published by the

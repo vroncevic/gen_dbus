@@ -37,7 +37,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -77,42 +77,34 @@ class GenDBusTestCase(TestCase):
     def test_missing_args(self) -> None:
         '''Missing args'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_dbus_run.py')
         generator: GenDBus = GenDBus()
         self.assertFalse(generator.process())
 
     def test_wrong_arg(self) -> None:
         '''Generate project'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_dbus_run.py')
-        sys.argv.insert(2, '-d')
-        sys.argv.insert(3, 'wrong')
+        sys.argv.insert(0, '-d')
+        sys.argv.insert(1, 'wrong')
         generator: GenDBus = GenDBus()
         self.assertFalse(generator.process())
 
     def test_process(self) -> None:
         '''Generate project'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_dbus_run.py')
-        sys.argv.insert(2, '-g')
-        sys.argv.insert(3, 'latest')
-        sys.argv.insert(4, '-t')
-        sys.argv.insert(5, 'posix_c')
+        sys.argv.insert(0, '-n')
+        sys.argv.insert(1, 'latest')
+        sys.argv.insert(2, '-t')
+        sys.argv.insert(3, 'posix_c')
         generator: GenDBus = GenDBus()
         self.assertTrue(generator.process())
 
     def test_tool_not_operational(self) -> None:
         '''Generate project not operational'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_dbus_run.py')
-        sys.argv.insert(2, '-g')
-        sys.argv.insert(3, 'fresh')
-        sys.argv.insert(4, '-t')
-        sys.argv.insert(5, 'posix_c')
+        sys.argv.insert(0, '-n')
+        sys.argv.insert(1, 'fresh')
+        sys.argv.insert(2, '-t')
+        sys.argv.insert(3, 'posix_c')
         generator: GenDBus = GenDBus()
         generator.tool_operational = False
         self.assertFalse(generator.process())
@@ -120,12 +112,10 @@ class GenDBusTestCase(TestCase):
     def test_pro_already_exists(self) -> None:
         '''Generate already existing project'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_dbus_run.py')
-        sys.argv.insert(2, '-g')
-        sys.argv.insert(3, 'fresh_new')
-        sys.argv.insert(4, '-t')
-        sys.argv.insert(5, 'posix_c')
+        sys.argv.insert(0, '-n')
+        sys.argv.insert(1, 'fresh_new')
+        sys.argv.insert(2, '-t')
+        sys.argv.insert(3, 'posix_c')
         generator: GenDBus = GenDBus()
         makedirs('fresh_new')
         self.assertFalse(generator.process())
