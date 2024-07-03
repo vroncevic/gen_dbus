@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from os.path import dirname, realpath
 
 try:
@@ -42,7 +42,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -82,55 +82,58 @@ class DBus(FileCheck, ProConfig, ProName):
         ProConfig.__init__(self, verbose)
         ProName.__init__(self, verbose)
         verbose_message(verbose, [f'{self._GEN_VERBOSE.lower()} init setup'])
-        self._reader: ReadTemplate | None = ReadTemplate(verbose)
-        self._writer: WriteTemplate | None = WriteTemplate(verbose)
+        self._reader: Optional[ReadTemplate] = ReadTemplate(verbose)
+        self._writer: Optional[WriteTemplate] = WriteTemplate(verbose)
         current_dir: str = dirname(realpath(__file__))
         pro_structure: str = f'{current_dir}{self._PRO_STRUCTURE}'
         self.check_path(pro_structure, verbose)
         self.check_mode('r', verbose)
         self.check_format(pro_structure, 'yaml', verbose)
         if self.is_file_ok():
-            yml2obj: Yaml2Object | None = Yaml2Object(pro_structure)
+            yml2obj: Optional[Yaml2Object] = Yaml2Object(pro_structure)
             self.config = yml2obj.read_configuration()
 
-    def get_reader(self) -> ReadTemplate | None:
+    def get_reader(self) -> Optional[ReadTemplate]:
         '''
             Gets template reader.
 
             :return: Template reader object | None
-            :rtype: <ReadTemplate> | <NoneType>
+            :rtype: <Optional[ReadTemplate]>
             :exceptions: None
         '''
         return self._reader
 
-    def get_writer(self) -> WriteTemplate | None:
+    def get_writer(self) -> Optional[WriteTemplate]:
         '''
             Gets template writer.
 
             :return: Template writer object | none
-            :rtype: <WriteTemplate> | <NoneType
+            :rtype: <Optional[WriteTemplate]>
             :exceptions: None
         '''
         return self._writer
 
     def gen_setup(
-        self, pro_name: str | None, pro_type: str | None, verbose: bool = False
+        self,
+        pro_name: Optional[str],
+        pro_type: Optional[str],
+        verbose: bool = False
     ) -> bool:
         '''
             Generate module generator_test.py.
 
             :param pro_name: Project name | None
-            :type pro_name: <str> | <NoneType>
+            :type pro_name: <Optional[str]>
             :param pro_type: Project type | None
-            :type pro_type: <str> | <NoneType>
+            :type pro_type: <Optional[str]>
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: True (success operation) | False
             :rtype: <bool>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('str:pro_name', pro_name), ('str:pro_type', pro_type)
         ])

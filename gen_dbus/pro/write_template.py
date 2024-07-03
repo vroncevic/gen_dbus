@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List, Dict, Tuple
+from typing import List, Dict, Optional
 from os import getcwd, chmod, mkdir
 from datetime import date
 from string import Template
@@ -32,6 +32,7 @@ try:
     from ats_utilities.console_io.error import error_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_value_error import ATSValueError
+    from gen_dbus.pro.read_template import Templates
 except ImportError as ats_error_message:
     # Force close python ATS ##################################################
     sys.exit(f'\n{__file__}\n{ats_error_message}\n')
@@ -40,7 +41,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -74,19 +75,19 @@ class WriteTemplate(FileCheck):
         verbose_message(verbose, [f'{self._GEN_VERBOSE} init writer'])
 
     def is_empty_substructure(
-        self, pro_setup: List[Tuple[Dict[str, str], Dict[str, str]]]
+        self, pro_setup: Templates
     ) -> bool:
         '''
             Check empty substructure.
 
             :param pro_setup: Project templates
-            :type pro_setup: <List[Tuple[Dict[str, str], Dict[str, str]]]>
+            :type pro_setup: <Templates>
             :return: True (detect empty section) | False
             :rtype: <bool>
             :exception: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('list:pro_setup', pro_setup)
         ])
@@ -101,26 +102,26 @@ class WriteTemplate(FileCheck):
 
     def write(
         self,
-        pro_setup: List[Tuple[Dict[str, str], Dict[str, str]]],
-        pro_name: str | None,
-        pro_type: str | None,
+        pro_setup: Templates,
+        pro_name: Optional[str],
+        pro_type: Optional[str],
         verbose: bool = False
     ) -> bool:
         '''
             Writes a template files.
 
             :param pro_setup: Project templates
-            :type pro_setup: <List[Tuple[Dict[str, str], Dict[str, str]]]>
+            :type pro_setup: <Templates>
             :param pro_name: Project name | None
-            :type pro_name: <str> | <NoneType>
+            :type pro_name: <Optional[str]>
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: True (success operation) | False
             :rtype: <bool>
             :exception: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('list:pro_setup', pro_setup),
             ('str:pro_name', pro_name),

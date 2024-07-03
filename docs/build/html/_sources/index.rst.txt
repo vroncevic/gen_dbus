@@ -184,10 +184,11 @@ Code structure
         │   ├── __init__.py
         │   ├── read_template.py
         │   └── write_template.py
+        ├── py.typed
         └── run/
             └── gen_dbus_run.py
-        
-        23 directories, 76 files
+    
+    23 directories, 77 files
 
 Copyright and licence
 ----------------------

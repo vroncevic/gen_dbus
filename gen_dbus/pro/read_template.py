@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import Any, List, Dict, Tuple
+from typing import Any, List, Tuple, Dict, Optional, TypeAlias
 from os.path import dirname, realpath
 
 try:
@@ -38,10 +38,13 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_dbus'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_dbus/blob/dev/LICENSE'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
+
+Artifacts: TypeAlias = Tuple[List[str], List[str]]
+Templates: TypeAlias = List[Tuple[Dict[str, str], Dict[str, str]]]
 
 
 class ReadTemplate(FileCheck):
@@ -87,21 +90,21 @@ class ReadTemplate(FileCheck):
         verbose_message(verbose, [f'{self._GEN_VERBOSE} init reader'])
 
     def _get_template_type_id(
-        self, pro_type: str | None, pro_setup: Dict[Any, Any] | None
+        self, pro_type: Optional[str], pro_setup: Optional[Dict[Any, Any]]
     ) -> int:
         '''
             Gets project type id.
 
             :param pro_type: Project type
-            :type pro_type: <str>
+            :type pro_type: <Optional[str]>
             :param pro_setup: Project configuration
-            :type pro_setup: <dict>
+            :type pro_setup: <Optional[Dict[Any, Any]]>
             :return: Project type ID (0 | 1 | 2 | -1)
             :rtype: <int>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('dict:pro_setup', pro_setup), ('str:pro_type', pro_type)
         ])
@@ -121,23 +124,23 @@ class ReadTemplate(FileCheck):
 
     def _get_artifacts(
         self,
-        pro_type: str | None,
-        pro_setup: Dict[Any, Any] | None,
-        pro_artifact_type: str | None
-    ) -> Tuple[List[str], List[str]]:
+        pro_type: Optional[str],
+        pro_setup: Optional[Dict[Any, Any]],
+        pro_artifact_type: Optional[str]
+    ) -> Artifacts:
         '''
             Gets artifacts from project configuration.
 
             :param pro_type: Project type
-            :type pro_type: <str>
+            :type pro_type: <Optional[str]>
             :param pro_setup: Project configuration
-            :type pro_setup: <dict>
+            :type pro_setup: <Optional[Dict[Any, Any]]>
             :return: Project modules (client and server)
-            :rtype: <Tuple[List[str], List[str]]>
+            :rtype: <Artifacts>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('dict:pro_setup', pro_setup),
             ('str:pro_type', pro_type),
@@ -174,25 +177,25 @@ class ReadTemplate(FileCheck):
 
     def read(
         self,
-        pro_setup: Dict[Any, Any] | None,
-        pro_type: str | None,
+        pro_setup: Optional[Dict[Any, Any]],
+        pro_type: Optional[str],
         verbose: bool = False
-    ) -> List[Tuple[Dict[str, str], Dict[str, str]]]:
+    ) -> Templates:
         '''
             Reads a templates.
 
             :param pro_setup: Project templates
-            :type pro_setup: <Dict[Any, Any]>
+            :type pro_setup: <Optional[Dict[Any, Any]]>
             :param pro_type: Project type | None
-            :type pro_type: <str> | <NoneType>
+            :type pro_type: <Optional[str]>
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: Template files for project setup
-            :rtype: <List[Tuple[Dict[str, str], Dict[str, str]]]>
+            :rtype: <Templates>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('dict:pro_setup', pro_setup), ('str:pro_type', pro_type)
         ])
@@ -202,7 +205,7 @@ class ReadTemplate(FileCheck):
             raise ATSValueError('missing templates')
         if not bool(pro_type):
             raise ATSValueError('missing project type')
-        pro_content: List[Tuple[Dict[str, str], Dict[str, str]]] = []
+        pro_content: Templates = []
         client_templates: List[str] = []
         server_templates: List[str] = []
         client_modules: List[str] = []
