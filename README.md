@@ -214,6 +214,16 @@ Generator structure
     23 directories, 77 files
 ```
 
+### Code coverage
+
+| Name | Stmts | Miss | Cover |
+|------|-------|------|-------|
+| `gen_dbus/__init__.py` | 75 | 14 | 81% |
+| `gen_dbus/pro/__init__.py` | 64 | 3 | 95% |
+| `gen_dbus/pro/read_template.py` | 117 | 17 | 85% |
+| `gen_dbus/pro/write_template.py` | 92 | 15 | 84% |
+| **Total** | 348 | 49 | 86% |
+
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/gen_dbus/badge/?version=latest)](https://gen-dbus.readthedocs.io/en/latest/?badge=latest)
