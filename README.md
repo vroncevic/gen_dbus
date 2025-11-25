@@ -23,6 +23,7 @@ other information that should be provided before the modules are installed.
     - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
+- [Code coverage](#code-coverage)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Copyright and Licence](#copyright-and-licence)
@@ -218,11 +219,11 @@ Generator structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_dbus/__init__.py` | 75 | 14 | 81% |
-| `gen_dbus/pro/__init__.py` | 64 | 3 | 95% |
-| `gen_dbus/pro/read_template.py` | 117 | 17 | 85% |
-| `gen_dbus/pro/write_template.py` | 92 | 15 | 84% |
-| **Total** | 348 | 49 | 86% |
+| `gen_dbus/__init__.py` | 73 | 12 | 84%|
+| `gen_dbus/pro/__init__.py` | 62 | 1 | 98%|
+| `gen_dbus/pro/read_template.py` | 115 | 15 | 87%|
+| `gen_dbus/pro/write_template.py` | 90 | 13 | 86%|
+| **Total** | 340 | 41 | 88% |
 
 ### Docs
 
@@ -241,7 +242,7 @@ More documentation and info at
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2021 - 2024 by [vroncevic.github.io/gen_dbus](https://vroncevic.github.io/gen_dbus)
+Copyright (C) 2021 - 2026 by [vroncevic.github.io/gen_dbus](https://vroncevic.github.io/gen_dbus)
 
 **gen_dbus** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,
