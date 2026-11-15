@@ -7,7 +7,17 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   gen_dbus.pro
+   gen_dbus.core
+   gen_dbus.infrastructure
+   gen_dbus.setup
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gen_dbus.engine
 
 Module contents
 ---------------

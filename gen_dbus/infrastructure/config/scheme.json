@@ -1,0 +1,35 @@
+{
+    "posix_c": {
+        "source_dir": "posix_c_templates",
+        "path_replacements": {
+            "pro_placeholder": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "posix_cxx": {
+        "source_dir": "posix_cxx_templates",
+        "path_replacements": {
+            "pro_placeholder": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "posix_py": {
+        "source_dir": "posix_py_templates",
+        "path_replacements": {
+            "pro_placeholder": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    }
+}

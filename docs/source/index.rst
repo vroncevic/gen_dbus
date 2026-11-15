@@ -1,7 +1,7 @@
-Generate DBus
+Generate D-Bus
 --------------
 
-**gen_dbus** is tool for generation of dbus modules.
+**gen_dbus** is a Clean Architecture Python generator tool for creating production-grade D-Bus IPC projects in C11, C++20, and Python 3.12+.
 
 Developed in `python <https://www.python.org/>`_ code.
 
@@ -9,13 +9,22 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-|gen_dbus python checker| |gen_dbus python package| |github issues| |documentation status| |github contributors|
+|gen_dbus python checker| |gen_dbus python package| |gen_dbus interface checker| |gen_dbus isp checker| |gen_dbus srp checker| |github issues| |documentation status| |github contributors|
 
 .. |gen_dbus python checker| image:: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_python_checker.yml
 
 .. |gen_dbus python package| image:: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package.yml
+   :target: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_package_checker.yml
+
+.. |gen_dbus interface checker| image:: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_interface_checker.yml
+
+.. |gen_dbus isp checker| image:: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_isp_checker.yml
+
+.. |gen_dbus srp checker| image:: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_dbus/actions/workflows/gen_dbus_srp_checker.yml
 
 .. |github issues| image:: https://img.shields.io/github/issues/vroncevic/gen_dbus.svg
    :target: https://github.com/vroncevic/gen_dbus/issues
@@ -33,8 +42,8 @@ other information that should be provided before the modules are installed.
    self
    modules
 
-Installation
--------------
+🚀 Installation
+---------------
 
 |gen_dbus python3 build|
 
@@ -51,155 +60,150 @@ To install **gen_dbus** type the following
 
     tar xvzf gen-dbus-x.y.z.tar.gz
     cd gen-dbus-x.y.z/
-    # python3
-    wget https://bootstrap.pypa.io/get-pip.py
-    python3 get-pip.py 
-    python3 -m pip install --upgrade setuptools
-    python3 -m pip install --upgrade pip
-    python3 -m pip install --upgrade build
+    python3 -m pip install --upgrade setuptools pip build
     pip3 install -r requirements.txt
     python3 -m build --no-isolation --wheel
     pip3 install ./dist/gen_dbus-*-py3-none-any.whl
-    rm -f get-pip.py
-    chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_dbus_run.py
-    ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_dbus_run.py /usr/local/bin/gen_dbus_run.py
 
 You can use Docker to create image/container, or You can use pip to install
 
 .. code-block:: bash
 
-    #python3
-    pip3 install gen_dbus
+    pip3 install gen-dbus
 
-Dependencies
--------------
+📦 Dependencies
+---------------
 
 **gen_dbus** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 
-Tool structure
-------------------
+📁 Tool structure
+-----------------
 
-**gen_dbus** is based on OOP
+**gen_dbus** is based on Clean / Hexagonal Architecture and SOLID principles:
 
 Code structure
 
 .. code-block:: bash
 
     gen_dbus/
-        ├── conf/
-        │   ├── gen_dbus.cfg
-        │   ├── gen_dbus.logo
-        │   ├── gen_dbus_util.cfg
-        │   ├── project.yaml
-        │   └── template/
-        │       ├── posix_c/
-        │       │   ├── dbus_client/
-        │       │   │   ├── AUTHORS.template
-        │       │   │   ├── autogen.template
-        │       │   │   ├── ChangeLog.template
-        │       │   │   ├── configure.template
-        │       │   │   ├── COPYING.template
-        │       │   │   ├── Makefile.template
-        │       │   │   ├── NEWS.template
-        │       │   │   ├── README.template
-        │       │   │   └── src/
-        │       │   │       ├── main.template
-        │       │   │       └── Makefile.template
-        │       │   └── dbus_server/
-        │       │       ├── AUTHORS.template
-        │       │       ├── autogen.template
-        │       │       ├── ChangeLog.template
-        │       │       ├── configure.template
-        │       │       ├── COPYING.template
-        │       │       ├── Makefile.template
-        │       │       ├── NEWS.template
-        │       │       ├── README.template
-        │       │       └── src/
-        │       │           ├── main.template
-        │       │           └── Makefile.template
-        │       ├── posix_cxx/
-        │       │   ├── dbus_client/
-        │       │   │   ├── AUTHORS.template
-        │       │   │   ├── autogen.template
-        │       │   │   ├── ChangeLog.template
-        │       │   │   ├── configure.template
-        │       │   │   ├── COPYING.template
-        │       │   │   ├── Makefile.template
-        │       │   │   ├── NEWS.template
-        │       │   │   ├── po/
-        │       │   │   │   ├── ChangeLog.template
-        │       │   │   │   ├── LINGUAS.template
-        │       │   │   │   └── POTFILES.template
-        │       │   │   ├── README.template
-        │       │   │   └── src/
-        │       │   │       ├── main.template
-        │       │   │       └── Makefile.template
-        │       │   └── dbus_server/
-        │       │       ├── AUTHORS.template
-        │       │       ├── autogen.template
-        │       │       ├── ChangeLog.template
-        │       │       ├── configure.template
-        │       │       ├── COPYING.template
-        │       │       ├── Makefile.template
-        │       │       ├── NEWS.template
-        │       │       ├── po/
-        │       │       │   ├── ChangeLog.template
-        │       │       │   ├── LINGUAS.template
-        │       │       │   └── POTFILES.template
-        │       │       ├── README.template
-        │       │       └── src/
-        │       │           ├── main.template
-        │       │           └── Makefile.template
-        │       └── posix_py/
-        │           ├── dbus_client/
-        │           │   ├── AUTHORS.template
-        │           │   ├── autogen.template
-        │           │   ├── ChangeLog.template
-        │           │   ├── configure.template
-        │           │   ├── COPYING.template
-        │           │   ├── Makefile.template
-        │           │   ├── NEWS.template
-        │           │   ├── README.template
-        │           │   └── src/
-        │           │       ├── dbus_client.template
-        │           │       └── Makefile.template
-        │           └── dbus_server/
-        │               ├── AUTHORS.template
-        │               ├── autogen.template
-        │               ├── ChangeLog.template
-        │               ├── configure.template
-        │               ├── COPYING.template
-        │               ├── Makefile.template
-        │               ├── NEWS.template
-        │               ├── README.template
-        │               └── src/
-        │                   ├── dbus_server.template
-        │                   └── Makefile.template
-        ├── __init__.py
-        ├── log/
-        │   └── gen_dbus.log
-        ├── pro/
-        │   ├── __init__.py
-        │   ├── read_template.py
-        │   └── write_template.py
-        ├── py.typed
-        └── run/
-            └── gen_dbus_run.py
-    
-    23 directories, 77 files
+         ├── core/
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── bus_type.py
+         │   │   ├── dbus_role.py
+         │   │   ├── __init__.py
+         │   │   ├── project_setup.py
+         │   │   └── project_type.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── __init__.py
+         │       ├── iservice.py
+         │       └── isubprocessor.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── bundle.py
+         │   │   ├── definition.py
+         │   │   ├── executor.py
+         │   │   ├── idefinition.py
+         │   │   ├── iexecutor.py
+         │   │   └── __init__.py
+         │   ├── config/
+         │   │   ├── gen_dbus.cfg
+         │   │   ├── gen_dbus.logo
+         │   │   ├── scheme.json
+         │   │   └── templates.tgz
+         │   ├── __init__.py
+         │   ├── ischeme_builder.py
+         │   ├── scheme_builder.py
+         │   └── subprocessor.py
+         ├── __init__.py
+         ├── py.typed
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-Copyright and licence
-----------------------
+     10 directories, 50 files
 
-|license: gpl v3| |license: apache 2.0|
+✨ Features
+-----------
 
-.. |license: gpl v3| image:: https://img.shields.io/badge/license-gplv3-blue.svg
-   :target: https://www.gnu.org/licenses/gpl-3.0
+* Generates production-ready, wire-compatible D-Bus IPC projects across 3 stacks: ``posix_c`` (C11 ``libdbus-1``), ``posix_cxx`` (C++20 RAII ``libdbus-1``), and ``posix_py`` (Python 3.12+ Clean Architecture ``dbus-fast``).
+* Complete D-Bus Object Model out of the box: Method Calls (``Ping``, ``SetStatus``), Signals (``StatusChanged``), Properties (``Status``, ``CallCount``, ``PropertiesChanged``), and Introspection XML.
+* Supports endpoint role filtering (``--role {both,client,server}``) and bus selection (``--bus {session,system}``).
+* Strict SOLID & Hexagonal Architecture with structural ``Protocol`` interfaces, 10.00/10 ``pylint`` score, and 100% unit test coverage.
 
-.. |license: apache 2.0| image:: https://img.shields.io/badge/license-apache%202.0-blue.svg
-   :target: https://opensource.org/licenses/apache-2.0
+📊 Code coverage
+----------------
+
+.. csv-table:: Code coverage
+   :file: coverage_table.csv
+   :widths: 60, 10, 10, 20
+   :header-rows: 1
+
+🛠 Usage
+--------
+
+Install package
+
+.. code-block:: bash
+
+    pip3 install gen-dbus
+
+Prepare main entry point by downloading ``main.py`` or create your own.
+
+.. code-block:: bash
+
+    wget -O main.py https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/main.py
+
+Running tool for creating D-Bus IPC projects across supported ``--type``, ``--role``, and ``--bus`` options
+
+.. code-block:: bash
+
+    python3 main.py create --name telemetry_c --type posix_c --role both --bus session --output ./demo/posix_c
+    python3 main.py create --name telemetry_cxx --type posix_cxx --role both --bus session --output ./demo/posix_cxx
+    python3 main.py create --name telemetry_py --type posix_py --role both --bus session --output ./demo/posix_py
+
+📚 Docs
+-------
+
+More documentation and info at
+
+* `gen-dbus.readthedocs.io <https://gen-dbus.readthedocs.io>`_
+* `www.python.org <https://www.python.org/>`_
+
+👥 Contributing
+---------------
+
+`Contributing to gen_dbus <https://github.com/vroncevic/gen_dbus/blob/dev/CONTRIBUTING.md>`_
+
+📄 Copyright and licence
+-------------------------
 
 Copyright (C) 2021 - 2026 by `vroncevic.github.io/gen_dbus <https://vroncevic.github.io/gen_dbus>`_
 
@@ -208,20 +212,3 @@ it under the same terms as Python itself, either Python version 3.x or,
 at your option, any later version of Python 3 you may have available.
 
 Lets help and support PSF.
-
-|python software foundation|
-
-.. |python software foundation| image:: https://raw.githubusercontent.com/vroncevic/gen_dbus/dev/docs/psf-logo-alpha.png
-   :target: https://www.python.org/psf/
-
-|donate|
-
-.. |donate| image:: https://www.paypalobjects.com/en_us/i/btn/btn_donatecc_lg.gif
-   :target: https://www.python.org/psf/donations/
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
