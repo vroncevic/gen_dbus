@@ -46,7 +46,6 @@ VERSIONS: list[str] = ['3.12', '3.13', '3.14']
 SUPPORTED_PY_VERSIONS: list[str] = [f'{PROGRAMMING_LANG} {VERSION}' for VERSION in VERSIONS]
 PYP_CLASSIFIERS: list[str] = SUPPORTED_PY_VERSIONS
 
-
 def find_package_data(pkg: str) -> list[str]:
     '''
         Finds all files in package to include in package_data.
@@ -69,7 +68,6 @@ def find_package_data(pkg: str) -> list[str]:
             package_data.append(rel_path)
 
     return package_data
-
 
 setup(
     name='gen_dbus',
